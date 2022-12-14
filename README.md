@@ -43,7 +43,6 @@
 | <a name="input_project"></a> [project](#input\_project) | (Required) The name of the project. | `string` | n/a | yes |
 | <a name="input_service_principal_description"></a> [service\_principal\_description](#input\_service\_principal\_description) | (Required) A description of the service principal provided for internal end-users. | `string` | n/a | yes |
 | <a name="input_sign_in_audience"></a> [sign\_in\_audience](#input\_sign\_in\_audience) | (Optional) The Microsoft account types that are supported for the current application. Must be one of `AzureADMyOrg`, `AzureADMultipleOrgs`, `AzureADandPersonalMicrosoftAccount` or `PersonalMicrosoftAccount`. Defaults to AzureADMyOrg. | `string` | `"AzureADMyOrg"` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | (Required) A mapping of tags to assign to the resource. | `map(string)` | n/a | yes |
 
 ## Outputs
 
