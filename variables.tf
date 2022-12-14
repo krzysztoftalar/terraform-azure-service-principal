@@ -1,21 +1,21 @@
 variable "owner" {
-  type        = string
   description = "(Required) Company to which the projects belong."
+  type        = string
 }
 
 variable "project" {
-  type        = string
   description = "(Required) The name of the project."
+  type        = string
 }
 
 variable "environment" {
-  type        = string
   description = "(Required) The name of the environment."
+  type        = string
 }
 
 variable "management" {
-  type        = string
   description = "(Required) A description of how this resource is managed, such as `Terraform Cloud - Local`, `Terraform Cloud - Remote`."
+  type        = string
 }
 
 variable "application_display_name" {
@@ -64,9 +64,4 @@ variable "password_rotation_in_days" {
   description = "(Optional) Number of days to add to the base timestamp to configure the rotation timestamp. When the current time has passed the rotation timestamp, the resource will trigger recreation. Defaults to 180 days."
   type        = number
   default     = 180
-}
-
-variable "tags" {
-  description = "(Required) A mapping of tags to assign to the resource."
-  type        = map(string)
 }
