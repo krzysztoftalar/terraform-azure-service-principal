@@ -30,7 +30,7 @@ variable "sign_in_audience" {
 }
 
 variable "assignments" {
-  description = <<EOT
+  description = <<-EOT
     (Required) The list of role assignments to the service principal.
     assignments = {
       scope : "The scope at which the Role Assignment applies to, such as `/subscriptions/xxxxx000-0000-0000-0000-xxxx0000xxxx`."
