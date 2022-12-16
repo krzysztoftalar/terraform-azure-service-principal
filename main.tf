@@ -31,25 +31,27 @@ resource "azuread_service_principal" "this" {
 # Role assignments (in Subscription) for service principal
 # ----------------------------------------------
 resource "azurerm_role_assignment" "this" {
-  count = length(var.assignments)
+  for_each = {
+    for ra in var.assignments : ra.scope => ra
+  }
 
   principal_id         = azuread_service_principal.this.object_id
-  scope                = var.assignments[count.index].scope
-  role_definition_name = var.assignments[count.index].role_definition_name
+  scope                = each.key
+  role_definition_name = each.value.role_definition_name
 }
 
 # ----------------------------------------------
 # Manages a rotating time resource
 # ----------------------------------------------
 resource "time_rotating" "this" {
-  rotation_rfc3339 = var.password_end_date
-  rotation_years   = var.password_rotation_in_years
-  rotation_days    = var.password_rotation_in_days
+  rotation_days = var.password_rotation_in_days
 
   triggers = {
-    end_date = var.password_end_date
-    years    = var.password_rotation_in_years
-    days     = var.password_rotation_in_days
+    days = var.password_rotation_in_days
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
@@ -57,10 +59,16 @@ resource "time_rotating" "this" {
 # Application Client Secret
 # ----------------------------------------------
 resource "azuread_application_password" "this" {
-  display_name = var.application_display_name
+  display_name          = var.application_display_name
   application_object_id = azuread_application.this.object_id
+
+  end_date = var.password_end_date
 
   rotate_when_changed = {
     rotation = time_rotating.this.id
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }

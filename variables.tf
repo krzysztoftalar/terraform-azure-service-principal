@@ -37,7 +37,7 @@ variable "assignments" {
       role_definition_name : "The name of a built-in Role."
     }
   EOT
-  type        = list(object({
+  type = list(object({
     scope                = string
     role_definition_name = string
   }))
@@ -49,19 +49,13 @@ variable "service_principal_description" {
 }
 
 variable "password_end_date" {
-  description = "(Optional) The relative duration or RFC3339 rotation timestamp after which the password expire. Defaults to the current time."
+  description = "(Optional) The end date until which the password is valid, formatted as an RFC3339 date string (e.g. 2018-01-01T01:02:03Z). Defaults to 1 year (automatically set by Azure)."
   type        = string
   default     = null
 }
 
-variable "password_rotation_in_years" {
-  description = "(Optional) Number of years to add to the base timestamp to configure the password rotation timestamp. Defaults to null."
+variable "password_rotation_in_days" {
+  description = "(Required) Number of days to add to the base timestamp to configure the rotation timestamp. When the current time has passed the rotation timestamp, the resource will trigger recreation. Defaults to null."
   type        = number
   default     = null
-}
-
-variable "password_rotation_in_days" {
-  description = "(Optional) Number of days to add to the base timestamp to configure the rotation timestamp. When the current time has passed the rotation timestamp, the resource will trigger recreation. Defaults to 180 days."
-  type        = number
-  default     = 180
 }
