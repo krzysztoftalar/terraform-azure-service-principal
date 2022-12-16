@@ -55,7 +55,6 @@ variable "password_end_date" {
 }
 
 variable "password_rotation_in_days" {
-  description = "(Required) Number of days to add to the base timestamp to configure the rotation timestamp. When the current time has passed the rotation timestamp, the resource will trigger recreation. Defaults to null."
+  description = "(Required) Number of days to add to the base timestamp to configure the rotation timestamp. When the current time has passed the rotation timestamp, the resource will trigger recreation."
   type        = number
-  default     = null
 }
